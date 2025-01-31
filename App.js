@@ -3,13 +3,14 @@ import { useState } from 'react';
 
 export default function App() {
   const [enteredGoalText, setEnteredGoalText] = useState('');
+  const [courseGoals, setCourseGoals] = useState([]);
 
   function goalInputHandler(enteredText) {
     setEnteredGoalText(enteredText);
   }
 
   function addGoalHandler() {
-    console.log(enteredGoalText);
+    setCourseGoals((prev) => [...prev, enteredGoalText]);
   }
 
   return (
@@ -23,7 +24,9 @@ export default function App() {
         <Button onPress={addGoalHandler} style={styles.button} title="Add" />
       </View>
       <View style={styles.goalsContainer}>
-        <Text>List of goals..</Text>
+        {courseGoals.map((item) => (
+          <Text>{item}</Text>
+        ))}
       </View>
     </View>
   );
