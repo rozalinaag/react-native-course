@@ -1,6 +1,6 @@
 import { StyleSheet, View } from 'react-native';
 
-export default function App() {
+export default function Home() {
   return <View style={styles.appContainer}></View>;
 }
 
