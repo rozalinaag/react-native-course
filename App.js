@@ -1,4 +1,11 @@
-import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  TextInput,
+  ScrollView,
+} from 'react-native';
 import { useState } from 'react';
 
 export default function App() {
@@ -28,11 +35,15 @@ export default function App() {
 
       <View style={styles.goalsContainer}>
         <Text style={styles.title}>To Buy:</Text>
-        {courseGoals.map((item) => (
-          <Text style={styles.item} key={item}>
-            🛒 {item}
-          </Text>
-        ))}
+        <ScrollView>
+          <View style={styles.items}>
+            {courseGoals.map((item, index) => (
+              <Text style={styles.item} key={index}>
+                🛒 {item}
+              </Text>
+            ))}
+          </View>
+        </ScrollView>
       </View>
     </View>
   );
@@ -78,5 +89,11 @@ const styles = StyleSheet.create({
   item: {
     color: 'white',
     padding: 3,
+    padding: 8,
+    borderRadius: 6,
+    backgroundColor: '#5e0acc',
+  },
+  items: {
+    gap: 10,
   },
 });
