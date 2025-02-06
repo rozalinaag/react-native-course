@@ -7,11 +7,15 @@ export default function App() {
   const [courseGoals, setCourseGoals] = useState([]);
 
   function addGoalHandler(enteredGoalText) {
-    setCourseGoals((prev) => [...prev, enteredGoalText]);
+    setCourseGoals((prev) => [
+      ...prev,
+      { text: enteredGoalText, id: Math.random().toString() },
+    ]);
   }
 
   function deleteGoalHandler(id) {
     setCourseGoals((current) => {
+      console.log(id);
       return current.filter((goal) => goal.id !== id);
     });
   }
@@ -24,11 +28,11 @@ export default function App() {
         <Text style={styles.title}>To Buy:</Text>
         <ScrollView>
           <View style={styles.items}>
-            {courseGoals.map((item, index) => (
+            {courseGoals.map((item) => (
               <GoalItem
-                key={index}
-                text={item}
-                onDelete={() => deleteGoalHandler(index)}
+                key={item.id}
+                text={item.text}
+                onDelete={() => deleteGoalHandler(item.id)}
               />
             ))}
           </View>
