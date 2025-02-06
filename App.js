@@ -7,6 +7,7 @@ import {
   ScrollView,
 } from 'react-native';
 import { useState } from 'react';
+import GoalItem from './components/GoalItem';
 
 export default function App() {
   const [enteredGoalText, setEnteredGoalText] = useState('');
@@ -38,9 +39,7 @@ export default function App() {
         <ScrollView>
           <View style={styles.items}>
             {courseGoals.map((item, index) => (
-              <Text style={styles.item} key={index}>
-                🛒 {item}
-              </Text>
+              <GoalItem key={index} text={item} />
             ))}
           </View>
         </ScrollView>
@@ -85,13 +84,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 800,
     paddingBottom: 10,
-  },
-  item: {
-    color: 'white',
-    padding: 3,
-    padding: 8,
-    borderRadius: 6,
-    backgroundColor: '#5e0acc',
   },
   items: {
     gap: 10,
