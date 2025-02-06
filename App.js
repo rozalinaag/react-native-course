@@ -32,11 +32,11 @@ export default function App() {
 
   return (
     <View style={styles.appContainer}>
-      <View>
+      <View style={styles.addNew}>
         <Button
-          title="Add New Goal"
-          color="#5e0acc"
+          title="Add New Item"
           onPress={startAddGoalHandler}
+          color="white"
         />
       </View>
 
@@ -82,5 +82,12 @@ const styles = StyleSheet.create({
   },
   items: {
     gap: 10,
+  },
+  addNew: {
+    backgroundColor: '#0b57d0',
+    color: 'white',
+    borderRadius: 10,
+    marginTop: 40,
+    marginBottom: 40,
   },
 });
