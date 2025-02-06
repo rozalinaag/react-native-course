@@ -10,6 +10,12 @@ export default function App() {
     setCourseGoals((prev) => [...prev, enteredGoalText]);
   }
 
+  function deleteGoalHandler(id) {
+    setCourseGoals((current) => {
+      return current.filter((goal) => goal.id !== id);
+    });
+  }
+
   return (
     <View style={styles.appContainer}>
       <View style={styles.goalsContainer}>
@@ -19,7 +25,11 @@ export default function App() {
         <ScrollView>
           <View style={styles.items}>
             {courseGoals.map((item, index) => (
-              <GoalItem key={index} text={item} />
+              <GoalItem
+                key={index}
+                text={item}
+                onDelete={() => deleteGoalHandler(index)}
+              />
             ))}
           </View>
         </ScrollView>
