@@ -1,16 +1,22 @@
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, Button } from 'react-native';
 import { useState } from 'react';
 import GoalItem from './components/GoalItem';
 import GoalInput from './components/GoalInput';
 
 export default function App() {
+  const [modalIsVisible, setModalIsVisible] = useState(false);
   const [courseGoals, setCourseGoals] = useState([]);
+
+  function startAddGoalHandler() {
+    setModalIsVisible(true);
+  }
 
   function addGoalHandler(enteredGoalText) {
     setCourseGoals((prev) => [
       ...prev,
       { text: enteredGoalText, id: Math.random().toString() },
     ]);
+    endAddGoalHandler();
   }
 
   function deleteGoalHandler(id) {
@@ -20,11 +26,27 @@ export default function App() {
     });
   }
 
+  function endAddGoalHandler() {
+    setModalIsVisible(false);
+  }
+
   return (
     <View style={styles.appContainer}>
-      <View style={styles.goalsContainer}>
-        <GoalInput onAddGoal={addGoalHandler} />
+      <View>
+        <Button
+          title="Add New Goal"
+          color="#5e0acc"
+          onPress={startAddGoalHandler}
+        />
+      </View>
 
+      <GoalInput
+        onCancel={endAddGoalHandler}
+        onAddGoal={addGoalHandler}
+        isModalVisible={modalIsVisible}
+      />
+
+      <View style={styles.goalsContainer}>
         <Text style={styles.title}>To Buy:</Text>
         <ScrollView>
           <View style={styles.items}>
@@ -45,7 +67,7 @@ export default function App() {
 const styles = StyleSheet.create({
   appContainer: {
     flex: 1,
-    backgroundColor: '#141414',
+    backgroundColor: '#ddd',
     padding: 50,
     height: '100%',
   },
