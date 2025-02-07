@@ -2,6 +2,7 @@ import { StyleSheet, Text, View, ScrollView, Button } from 'react-native';
 import { useState } from 'react';
 import GoalItem from './components/GoalItem';
 import GoalInput from './components/GoalInput';
+import { StatusBar } from 'expo-status-bar';
 
 export default function App() {
   const [modalIsVisible, setModalIsVisible] = useState(false);
@@ -31,43 +32,46 @@ export default function App() {
   }
 
   return (
-    <View style={styles.appContainer}>
-      <View style={styles.addNew}>
-        <Button
-          title="Add New Item"
-          onPress={startAddGoalHandler}
-          color="white"
+    <>
+      <StatusBar style="auto" />
+
+      <View style={styles.appContainer}>
+        <View style={styles.addNew}>
+          <Button
+            title="Add New Item"
+            onPress={startAddGoalHandler}
+            color="white"
+          />
+        </View>
+
+        <GoalInput
+          onCancel={endAddGoalHandler}
+          onAddGoal={addGoalHandler}
+          isModalVisible={modalIsVisible}
         />
-      </View>
 
-      <GoalInput
-        onCancel={endAddGoalHandler}
-        onAddGoal={addGoalHandler}
-        isModalVisible={modalIsVisible}
-      />
-
-      <View style={styles.goalsContainer}>
-        <Text style={styles.title}>To Buy:</Text>
-        <ScrollView>
-          <View style={styles.items}>
-            {courseGoals.map((item) => (
-              <GoalItem
-                key={item.id}
-                text={item.text}
-                onDelete={() => deleteGoalHandler(item.id)}
-              />
-            ))}
-          </View>
-        </ScrollView>
+        <View style={styles.goalsContainer}>
+          <Text style={styles.title}>To Buy:</Text>
+          <ScrollView>
+            <View style={styles.items}>
+              {courseGoals.map((item) => (
+                <GoalItem
+                  key={item.id}
+                  text={item.text}
+                  onDelete={() => deleteGoalHandler(item.id)}
+                />
+              ))}
+            </View>
+          </ScrollView>
+        </View>
       </View>
-    </View>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
   appContainer: {
     flex: 1,
-    backgroundColor: '#ddd',
     padding: 50,
     height: '100%',
   },
